@@ -62,6 +62,49 @@ public class RTMPModule extends ReactContextBaseJavaModule {
         promise.resolve(!rtmpCamera1.isStreaming());
     }
 
+
+    @ReactMethod
+    public void startPreview() {
+        if (rtmpCamera1 != null) {
+            rtmpCamera1.startPreview();
+        }
+    }
+
+    @ReactMethod
+    public void stopPreview() {
+        if (rtmpCamera1 != null) {
+            rtmpCamera1.stopPreview();
+        }
+    }
+
+    @ReactMethod
+    public void disableVideo() {
+        if (rtmpCamera1 != null && rtmpCamera1.isStreaming()) {
+            rtmpCamera1.disableVideo();
+        }
+    }
+
+    @ReactMethod
+    public void disableAudio() {
+        if (rtmpCamera1 != null && rtmpCamera1.isStreaming()) {
+            rtmpCamera1.disableAudio();
+        }
+    }
+
+    @ReactMethod
+    public void enableAudio() {
+        if (rtmpCamera1 != null && rtmpCamera1.isStreaming()) {
+            rtmpCamera1.enableAudio();
+        }
+    }
+
+    @ReactMethod
+    public void enableVideo() {
+        if (rtmpCamera1 != null && rtmpCamera1.isStreaming()) {
+            rtmpCamera1.enableVideo();
+        }
+    }
+
     @ReactMethod
     public void switchCamera(Promise promise) {
         if (rtmpCamera1 != null && rtmpCamera1.isStreaming()) {

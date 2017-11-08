@@ -10,72 +10,43 @@ import {
     TouchableOpacity
 } from 'react-native';
 
-
-import RTMPStreamingView from '../RTMPStreamingView'
-
-const RTMPModule = NativeModules.RTMPModule;
+import RNLive from "../lib/RNLive";
 
 export default class App extends Component<{}> {
 
     constructor(props) {
         super(props);
         this.state = {
-            publishing: false,
+            started: false,
             videoEnabled: true,
             audioEnabled: true,
+            cameraFronted: true,
         }
     }
 
-    startPublish = async (rtmpUrl) => {
-        return await RTMPModule.startStream(rtmpUrl);
-    };
-
-    stopPublish = async () => {
-        return await RTMPModule.stopStream();
-    };
-
-    switchCamera = async () => {
-        return await RTMPModule.switchCamera();
-    };
-
     onPublishButtonPressed = () => {
-        const {publishing} = this.state;
-
-        if (!publishing) {
-            const rtmpURL = 'rtmp://172.16.1.181:1935/live/test';
-            this.startPublish(rtmpURL);
-            this.setState({
-                publishing: true,
-            })
-        }
-
-    };
-
-    componentDidMount = () => {
+        this.setState({
+            started: true,
+        })
     };
 
     onCancelButtonPressed = () => {
-        const {publishing} = this.state;
-
-        if (publishing) {
-            this.stopPublish();
-            this.setState({
-                publishing: false,
-            })
-        }
+        const {started} = this.state;
+        this.setState({
+            started: false,
+        })
     };
 
     onSwitchButtonPressed = () => {
-        const {publishing} = this.state;
-
-        if (publishing) {
-            this.switchCamera();
-        }
+        const {cameraFronted} = this.state;
+        this.setState({
+            cameraFronted: !cameraFronted,
+        })
     };
 
     renderPublishButton = () => {
-        const {publishing} = this.state;
-        if (!publishing) {
+        const {started} = this.state;
+        if (!started) {
             return (
                 <View>
                     <TouchableOpacity style={styles.publish} onPress={this.onPublishButtonPressed}>
@@ -87,8 +58,8 @@ export default class App extends Component<{}> {
     };
 
     renderCancelButton = () => {
-        const {publishing} = this.state;
-        if (publishing) {
+        const {started} = this.state;
+        if (started) {
             return (
                 <View>
                     <TouchableOpacity style={styles.cancel} onPress={this.onCancelButtonPressed}>
@@ -101,8 +72,8 @@ export default class App extends Component<{}> {
     };
 
     renderToggleAudioButton = () => {
-        const {audioEnabled, publishing} = this.state;
-        if (!publishing) return;
+        const {audioEnabled, started} = this.state;
+        if (!started) return;
         if (audioEnabled) {
             return (
                 <View>
@@ -124,11 +95,6 @@ export default class App extends Component<{}> {
 
     onToggleAudioButtonPressed = () => {
         const {audioEnabled} = this.state;
-        if (audioEnabled) {
-            RTMPModule.disableAudio();
-        } else {
-            RTMPModule.enableAudio();
-        }
         this.setState({
             audioEnabled: !audioEnabled
         })
@@ -136,19 +102,14 @@ export default class App extends Component<{}> {
 
     onToggleVideoButtonPressed = () => {
         const {videoEnabled} = this.state;
-        if (videoEnabled) {
-            RTMPModule.disableVideo();
-        } else {
-            RTMPModule.enableVideo();
-        }
         this.setState({
             videoEnabled: !videoEnabled
         })
     };
 
     renderToggleVideoButton = () => {
-          const {videoEnabled, publishing} = this.state;
-        if (!publishing) return;
+          const {videoEnabled, started} = this.state;
+        if (!started) return;
           if (videoEnabled) {
               return (
                   <View>
@@ -179,8 +140,9 @@ export default class App extends Component<{}> {
     };
 
     renderCamera = () => {
+        const {started, videoEnabled, audioEnabled, cameraFronted} = this.state;
         return (
-            <RTMPStreamingView style={StyleSheet.absoluteFill}/>
+            <RNLive cameraFronted={cameraFronted} url='rtmp://172.16.1.181:1935/live/test' started={started} videoEnabled={videoEnabled} audioEnabled={audioEnabled}/>
         )
     };
 

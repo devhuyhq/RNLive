@@ -109,9 +109,8 @@ public class RTMPModule extends ReactContextBaseJavaModule {
     public void switchCamera(Promise promise) {
         if (rtmpCamera1 != null && rtmpCamera1.isStreaming()) {
             rtmpCamera1.switchCamera();
+            promise.resolve(rtmpCamera1.isStreaming());
         }
-
-        promise.resolve(rtmpCamera1.isStreaming());
     }
 
     public static void setSurfaceView(RTMPSurfaceView surface) {

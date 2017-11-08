@@ -1,3 +1,4 @@
-import RNLive from "./lib/RNLive";
+import { AppRegistry } from 'react-native';
+import App from './example/App';
 
-export default RNLive;
+AppRegistry.registerComponent('RNLive', () => App);

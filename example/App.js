@@ -142,7 +142,7 @@ export default class App extends Component<{}> {
     renderCamera = () => {
         const {started, videoEnabled, audioEnabled, cameraFronted} = this.state;
         return (
-            <RNLive cameraFronted={cameraFronted} url='rtmp://172.16.1.181:1935/live/test' started={started} videoEnabled={videoEnabled} audioEnabled={audioEnabled}/>
+            <RNLive style={{flex: 1}} landscape={false} cameraFronted={cameraFronted} url='rtmp://172.16.1.181:1935/live/test' started={started} videoEnabled={videoEnabled} audioEnabled={audioEnabled}/>
         )
     };
 
@@ -174,7 +174,10 @@ const styles = StyleSheet.create({
     },
     cover: {
         flex: 1,
+        width: '100%',
+        height: '100%',
         justifyContent: 'space-between',
+        position: 'absolute',
     },
     publish: {
         backgroundColor: '#0000ff',
@@ -230,5 +233,8 @@ const styles = StyleSheet.create({
         tintColor: '#ffffff',
         width: 24,
         height: 24,
+    },
+    camera: {
+        flex: 1,
     }
 });

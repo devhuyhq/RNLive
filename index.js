@@ -1,4 +1,4 @@
 import { AppRegistry } from 'react-native';
-import App from './example/App';
+import RNLive from "./lib/RNLive";
 
-AppRegistry.registerComponent('RNLive', () => App);
+AppRegistry.registerComponent('RNLive', () => RNLive);

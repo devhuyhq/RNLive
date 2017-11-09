@@ -21,5 +21,25 @@
   },
   "jest": {
     "preset": "react-native"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/devhuyhq/RNLive"
+  },
+  "keywords": [
+    "react",
+    "native",
+    "react-native",
+    "live",
+    "stream",
+    "rtmp",
+    "video",
+    "camera"
+  ],
+  "author": "Huy Ha Quang",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/devhuyhq/RNLive/issues"
+  },
+  "homepage": "https://github.com/devhuyhq/RNLive#readme"
 }

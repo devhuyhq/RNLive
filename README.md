@@ -2,7 +2,7 @@
 
 # Info
 This library based [rtmp-rtsp-stream-client-java](https://github.com/pedroSG94/rtmp-rtsp-stream-client-java)
-Add Stream based [LFLiveKit](https://github.com/LaiFengiOS/LFLiveKit)
+and [LFLiveKit](https://github.com/LaiFengiOS/LFLiveKit)
 
 **Support iOS and Android**
 
@@ -54,13 +54,12 @@ Run `npm install --save rn-live`
 
 ### iOS
 
-1. Add RCTLFLiveKit.xcodeproj to Libraries
-
-2. Your project Click
-
-3. Go to General -> Embedded Binaries and add LFLiveKit.framework
-
-4. Linked Frameworks and Libraries add LFLiveKit.framework
+1. In the XCode's "Project navigator", right click on your project's Libraries folder ➜ `Add Files to <...>`
+2. Go to `node_modules` ➜ `rn-live` ➜ `ios` ➜ select `RCTLFLiveKit.xcodeproj`
+3. Add `libRCTLFLiveKit.a` to `Build Phases -> Link Binary With Libraries`
+4. Go to General -> Embedded Binaries and add LFLiveKit.framework
+5. Linked Frameworks and Libraries add LFLiveKit.framework
+6. Compile and have fun
 
 ## Usage
 
@@ -77,6 +76,23 @@ Run `npm install --save rn-live`
         onStop={() => {}} // streaming stop
         />
 ```
+
+
+### Options
+
+option | iOS  | Android
+------ | ---- | -------
+cameraFronted | OK | OK
+started | OK | OK
+url | OK | OK
+landscape | OK | -
+onReady | OK | -
+onPending | OK | -
+onStart | OK | -
+onStop | OK | -
+onError | OK | -
+videoEnabled | - | OK
+audioEnabled | - | OK
 
 # License
 MIT
